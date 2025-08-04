@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "formation")
-public class Formation {
+public class Cours {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,15 +33,10 @@ public class Formation {
 
     private String nomformateur ;
 
-    private Long idDepartement;
 
-    public Long getIdDepartement() {
-        return idDepartement;
-    }
+    @OneToMany(mappedBy = "cours", cascade = CascadeType.ALL)
+    private List<Ressources> ressources = new ArrayList<>();
 
-    public void setIdDepartement(Long idDepartement) {
-        this.idDepartement = idDepartement;
-    }
 
 
     public Long getId() {
@@ -61,7 +57,7 @@ public class Formation {
         this.description = description;
     }
 
-    public Formation(Long id, String nom, String description, String etat, String type, Date datedebut, Date datefin, Integer nbrhour, Float prix, String nomformateur) {
+    public Cours(Long id, String nom, String description, String etat, String type, Date datedebut, Date datefin, Integer nbrhour, Float prix, String nomformateur) {
         this.id = id;
         this.nom = nom;
         this.description = description;
@@ -140,7 +136,7 @@ public class Formation {
 
 
 
-    public Formation() {
+    public Cours() {
     }
 
     @ManyToOne

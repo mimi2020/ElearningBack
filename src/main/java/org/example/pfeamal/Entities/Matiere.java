@@ -40,15 +40,15 @@ public class Matiere {
     }
 
     @OneToMany(mappedBy = "categorie")
-    private List<Formation> formations;
+    private List<Cours> formations;
 
     @JsonIgnore
-    public List<Formation> getFormations() {
+    public List<Cours> getFormations() {
         return formations;
     }
 
 
-    public void setFormations(List<Formation> formations) {
+    public void setFormations(List<Cours> formations) {
         this.formations = formations;
     }
 }

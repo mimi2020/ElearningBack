@@ -1,7 +1,7 @@
 package org.example.pfeamal.Repositories;
 
 
-import org.example.pfeamal.Entities.Formation;
+import org.example.pfeamal.Entities.Cours;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface FormationRepository extends JpaRepository<Formation,Long> {
+public interface FormationRepository extends JpaRepository<Cours,Long> {
 
 //   // long countByEtat_CompleteAndCategorieNameAndDatedebut_Year(String Name, Long Year);
 //
@@ -27,7 +27,7 @@ public interface FormationRepository extends JpaRepository<Formation,Long> {
    // long countByType_Externe();
 
     //Long countByEtat_COMPLETE()
-    @Query("select count(f) from Formation f")
+    @Query("select count(f) from Cours f")
     Long nbrformation();
 
 //    @Query("select count(f) from Formation f where f.type =?1")
@@ -47,11 +47,11 @@ public interface FormationRepository extends JpaRepository<Formation,Long> {
 //    List<Formation> listFormationEtat(EtatFormation etat );
 
 
-    @Query(value = "select f from  Formation f where  year(f.datedebut)=?2 and f.categorie.name=?1")
-    List<Formation> selectByCategoruandyear(String category,int year);
+    @Query(value = "select f from  Cours f where  year(f.datedebut)=?2 and f.categorie.name=?1")
+    List<Cours> selectByCategoruandyear(String category, int year);
 
-    @Query(value = "select f from Formation f where f.idDepartement=?1")
-    List<Formation> selectByDepartementIs(Long id);
+    @Query(value = "select f from Cours f where f.idDepartement=?1")
+    List<Cours> selectByDepartementIs(Long id);
 
 
 //    @Query(value = "")
@@ -67,10 +67,10 @@ public interface FormationRepository extends JpaRepository<Formation,Long> {
 //    List<Formation> findByDateFin(@Param("yesterday") Date yesterday);
 
 
-    @Query("SELECT f FROM Formation f WHERE f.etat = 'COMPLETE'")
-    List<Formation> findByDateFin();
+    @Query("SELECT f FROM Cours f WHERE f.etat = 'COMPLETE'")
+    List<Cours> findByDateFin();
 
 
-@Query("select f from Formation f where f.datefin=?1")
-    List<Formation> formation_termine_hier(Date d);
+@Query("select f from Cours f where f.datefin=?1")
+    List<Cours> formation_termine_hier(Date d);
 }

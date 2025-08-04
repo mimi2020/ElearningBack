@@ -76,7 +76,7 @@ public class Evaluation {
 //
     @ManyToOne
     @JoinColumn(name = "idformation")
-    private Formation formationEva;
+    private Cours formationEva;
 //
 //
 //    public Employe getEmployeEva() {
@@ -87,11 +87,11 @@ public class Evaluation {
 //        this.employeEva = employeEva;
 //    }
 //
-    public Formation getFormationEva() {
+    public Cours getFormationEva() {
         return formationEva;
     }
 
-    public void setFormationEva(Formation formationEva) {
+    public void setFormationEva(Cours formationEva) {
         this.formationEva = formationEva;
     }
 
