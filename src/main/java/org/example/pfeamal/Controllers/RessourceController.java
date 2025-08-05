@@ -2,6 +2,7 @@ package org.example.pfeamal.Controllers;
 
 
 import org.example.pfeamal.Entities.*;
+import org.example.pfeamal.Repositories.RessourcesRepository;
 import org.example.pfeamal.Repositories.UserRepository;
 import org.example.pfeamal.Services.*;
 import org.example.pfeamal.payload.response.MessageResponse;
@@ -34,7 +35,8 @@ public class RessourceController {
     @Autowired
     StorageService storageService ;
 
-
+@Autowired
+    RessourcesRepository ressourcesRepository ;
 
 
     @PostMapping("/addResource/{idcours}")
@@ -101,15 +103,28 @@ res.setCours(c);
     }
 
     @PutMapping("/update/{id}")
-    public Ressources Update(@PathVariable Long id,Ressources um) {
+    public Ressources Update(@PathVariable Long id,@RequestParam("idCours") Long idc,Ressources um,@RequestParam("file") MultipartFile file) {
 
         Ressources um1=ressourcesService.findUserById(id);
         if (um1!=null){
             um.setId(id);
+            
+String namesup=storageService.store(file);
+um.setContenuRes(namesup);
+     Cours c = coursService.findCoursById(idc);
+     if(c != null){
+         um.setCours(c);
+         System.out.println("**attached course ****");
+     }
+    else if(c == null){
+        um.setCours(null);
+        System.out.println("**null course ****");
+     }
 
-            return ressourcesService.updateRessources(um);
-        }else throw new RuntimeException("id user is not found");
-
+            ressourcesRepository.save(um);
+        }
+        else throw new RuntimeException("id ressource is not found");
+return um;
     }
 
 
