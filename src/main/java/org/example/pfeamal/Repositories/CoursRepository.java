@@ -10,13 +10,13 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface FormationRepository extends JpaRepository<Cours,Long> {
+public interface CoursRepository extends JpaRepository<Cours,Long> {
 
-//   // long countByEtat_CompleteAndCategorieNameAndDatedebut_Year(String Name, Long Year);
+//   // long countByEtat_CompleteAndmatiereNameAndDatedebut_Year(String Name, Long Year);
 //
 //
     //long count();
-    //Long countByCategorie
+    //Long countBymatiere
 //
 //    @Override
 //    <S extends Formation, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction);
@@ -37,21 +37,19 @@ public interface FormationRepository extends JpaRepository<Cours,Long> {
 
 //    @Query("select f from Formation f where f.type =?1")
 //    List<Formation> listformationbytype(TypeFormation type);
-//    @Query("select count (f) from Formation f , CategorieFormation c where f.categorie.name =?2 and year(f.datedebut)=?3 and f.etat=?1 ")
-//    int countByEtatCompleteAndCategorieNameAndDatedebutYear(EtatFormation etat, String Name, int Year);
+//    @Query("select count (f) from Formation f , matiereFormation c where f.matiere.name =?2 and year(f.datedebut)=?3 and f.etat=?1 ")
+//    int countByEtatCompleteAndmatiereNameAndDatedebutYear(EtatFormation etat, String Name, int Year);
 //
-//    @Query("select f from Formation f , CategorieFormation c where f.categorie.name =?2 and year(f.datedebut)=?3 and f.etat=?1 ")
-//    List<Formation> findByEtatCompleteAndCategorieNameAndDatedebutYear(EtatFormation etat, String Name, int Year);
+//    @Query("select f from Formation f , matiereFormation c where f.matiere.name =?2 and year(f.datedebut)=?3 and f.etat=?1 ")
+//    List<Formation> findByEtatCompleteAndmatiereNameAndDatedebutYear(EtatFormation etat, String Name, int Year);
 //
 //    @Query(value = "select f from Formation f where f.etat=?1")
 //    List<Formation> listFormationEtat(EtatFormation etat );
 
 
-    @Query(value = "select f from  Cours f where  year(f.datedebut)=?2 and f.categorie.name=?1")
+    @Query(value = "select f from  Cours f where  year(f.datedebut)=?2 and f.matiere.name=?1")
     List<Cours> selectByCategoruandyear(String category, int year);
 
-    @Query(value = "select f from Cours f where f.idDepartement=?1")
-    List<Cours> selectByDepartementIs(Long id);
 
 
 //    @Query(value = "")

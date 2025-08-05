@@ -39,16 +39,16 @@ public class Matiere {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "categorie")
-    private List<Cours> formations;
+    @OneToMany(mappedBy = "matiere")
+    private List<Cours> coursList;
 
     @JsonIgnore
-    public List<Cours> getFormations() {
-        return formations;
+
+    public List<Cours> getCoursList() {
+        return coursList;
     }
 
-
-    public void setFormations(List<Cours> formations) {
-        this.formations = formations;
+    public void setCoursList(List<Cours> coursList) {
+        this.coursList = coursList;
     }
 }

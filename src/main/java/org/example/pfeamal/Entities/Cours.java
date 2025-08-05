@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "formation")
+@Table(name = "Cours")
 public class Cours {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -140,15 +140,15 @@ public class Cours {
     }
 
     @ManyToOne
-    @JoinColumn(name = "categorieid")
-    private Matiere categorie;
+    @JoinColumn(name = "matiereid")
+    private Matiere matiere;
 
-    public Matiere getCategorie() {
-        return categorie;
+    public Matiere getmatiere() {
+        return matiere;
     }
 
-    public void setCategorie(Matiere categorie) {
-        this.categorie = categorie;
+    public void setmatiere(Matiere matiere) {
+        this.matiere = matiere;
     }
 
 //    @OneToMany(mappedBy = "Formationins",cascade = CascadeType.ALL)
