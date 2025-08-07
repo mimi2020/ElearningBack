@@ -108,7 +108,7 @@ res.setCours(c);
         Ressources um1=ressourcesService.findUserById(id);
         if (um1!=null){
             um.setId(id);
-            
+
 String namesup=storageService.store(file);
 um.setContenuRes(namesup);
      Cours c = coursService.findCoursById(idc);

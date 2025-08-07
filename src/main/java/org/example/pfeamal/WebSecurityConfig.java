@@ -94,8 +94,12 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 				.requestMatchers("/Ressource/**").permitAll()
 				.requestMatchers("/Cours/**").permitAll()
 				.requestMatchers("/Matiere/**").permitAll()
-				.requestMatchers("/quiz/**").authenticated()
-				.requestMatchers("/quiz/create").hasRole("FORMATEUR")
+				//.requestMatchers("/quiz/**").authenticated()
+				.requestMatchers("/Quiz/listquiz/**").permitAll()
+				.requestMatchers("/quiz/create").hasRole("ENSEIGNANT")
+
+				.requestMatchers("/Question/**").permitAll()
+				.requestMatchers("/Choice/**").permitAll()
 
 
 

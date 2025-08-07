@@ -1,14 +1,12 @@
 package org.example.pfeamal.Controllers;
 
 
+import org.example.pfeamal.Entities.Choice;
 import org.example.pfeamal.Entities.Enseignant;
-import org.example.pfeamal.Entities.Matiere;
+import org.example.pfeamal.Entities.Question;
 import org.example.pfeamal.Entities.Quiz;
-import org.example.pfeamal.Entities.User;
-import org.example.pfeamal.Repositories.EnseignantRepository;
-import org.example.pfeamal.Repositories.QuizRepo;
-import org.example.pfeamal.Repositories.UserRepository;
-import org.example.pfeamal.Services.MatireService;
+import org.example.pfeamal.Repositories.*;
+import org.example.pfeamal.Services.ChoiceService;
 import org.example.pfeamal.Services.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,40 +14,34 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.List;
 
 @RestController
-@RequestMapping("/Quiz")
+@RequestMapping("/Choice")
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class QuizController {
+public class ChoiceController {
 
 
 
 
     @Autowired
-    private QuizService quizService ;
+    private ChoiceService choiceService ;
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private EnseignantRepository enseignantRepository;
+    private EnseignantRepository enseignantRepository ;
 
+@Autowired
+private QuestionRepository questionRepository ;
     @Autowired
-    private QuizRepo quizRepo;
+    private ChoiceRepository choiceRepository ;
 
-    @PostMapping("/addquiz")
-    @PreAuthorize("hasRole('ENSEIGNANT')")
-    public ResponseEntity<?> createQuiz( Quiz quiz, Principal principal) {
-        Enseignant formateur = enseignantRepository.findByUsername(principal.getName()).get();
-       // quiz.setFormateur(formateur); relation entre enseignt et quiz
-        quiz.setEnseignant(formateur);
-        return ResponseEntity.ok(quizRepo.save(quiz));
+    @PostMapping("/addchoice/{idquestion}")
+
+    public ResponseEntity<?> createChoice(@PathVariable Long idquestion, Choice choice, Principal principal) {
+Question question = questionRepository.findById(idquestion).get() ;
+choice.setQuestion(question);
+        return ResponseEntity.ok(choiceRepository.save(choice));
     }
 
-@GetMapping("/listquiz")
-    public ResponseEntity<List<Quiz>> getAllQuiz() {
-        return ResponseEntity.ok(quizRepo.findAll());
-}
+
 /*
 
 

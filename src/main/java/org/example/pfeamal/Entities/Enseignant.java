@@ -1,6 +1,9 @@
 package org.example.pfeamal.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 
 @Entity
@@ -51,5 +54,17 @@ public class Enseignant extends User{
 
     public void setNom_prenom_ensignant(String nom_prenom_ensignant) {
         this.nom_prenom_ensignant = nom_prenom_ensignant;
+    }
+
+    @OneToMany(mappedBy = "enseignant", cascade = CascadeType.ALL)
+    private List<Quiz> quizList;
+
+    @JsonIgnore
+    public List<Quiz> getQuizList() {
+        return quizList;
+    }
+
+    public void setQuizList(List<Quiz> quizList) {
+        this.quizList = quizList;
     }
 }

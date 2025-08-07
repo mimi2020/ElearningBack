@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface EnseignantRepository extends JpaRepository<Enseignant,Long> {
-    Optional<User> findByUsername(String username);
+    Optional<Enseignant> findByUsername(String username);
 
     Boolean existsByUsername(String username);
 

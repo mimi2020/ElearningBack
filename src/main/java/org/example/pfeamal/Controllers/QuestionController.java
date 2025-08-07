@@ -1,55 +1,50 @@
 package org.example.pfeamal.Controllers;
 
 
-import org.example.pfeamal.Entities.Enseignant;
-import org.example.pfeamal.Entities.Matiere;
+import org.example.pfeamal.Entities.Choice;
+import org.example.pfeamal.Entities.Question;
 import org.example.pfeamal.Entities.Quiz;
-import org.example.pfeamal.Entities.User;
+import org.example.pfeamal.Repositories.ChoiceRepository;
 import org.example.pfeamal.Repositories.EnseignantRepository;
+import org.example.pfeamal.Repositories.QuestionRepository;
 import org.example.pfeamal.Repositories.QuizRepo;
-import org.example.pfeamal.Repositories.UserRepository;
-import org.example.pfeamal.Services.MatireService;
-import org.example.pfeamal.Services.QuizService;
+import org.example.pfeamal.Services.ChoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.List;
 
 @RestController
-@RequestMapping("/Quiz")
+@RequestMapping("/Question")
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class QuizController {
+public class QuestionController {
 
 
 
 
     @Autowired
-    private QuizService quizService ;
+    private ChoiceService choiceService ;
     @Autowired
-    private UserRepository userRepository;
+    private EnseignantRepository enseignantRepository ;
     @Autowired
-    private EnseignantRepository enseignantRepository;
+    private QuestionRepository questionRepository ;
+    @Autowired
+    QuizRepo quizRepo;
+
 
     @Autowired
-    private QuizRepo quizRepo;
+    private ChoiceRepository choiceRepository ;
 
-    @PostMapping("/addquiz")
-    @PreAuthorize("hasRole('ENSEIGNANT')")
-    public ResponseEntity<?> createQuiz( Quiz quiz, Principal principal) {
-        Enseignant formateur = enseignantRepository.findByUsername(principal.getName()).get();
-       // quiz.setFormateur(formateur); relation entre enseignt et quiz
-        quiz.setEnseignant(formateur);
-        return ResponseEntity.ok(quizRepo.save(quiz));
+    @PostMapping("/addquestion/{idquiz}")
+
+    public ResponseEntity<?> createQuestion(@PathVariable Long idquiz, Question q, Principal principal) {
+        Quiz qz=quizRepo.findById(idquiz).get() ;
+        q.setQuiz(qz);
+        return ResponseEntity.ok(questionRepository.save(q));
     }
 
-@GetMapping("/listquiz")
-    public ResponseEntity<List<Quiz>> getAllQuiz() {
-        return ResponseEntity.ok(quizRepo.findAll());
-}
+
 /*
 
 
