@@ -97,6 +97,9 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 				//.requestMatchers("/quiz/**").authenticated()
 				.requestMatchers("/Quiz/**").permitAll()
 				.requestMatchers("/quiz/create").hasRole("ENSEIGNANT")
+					//	.requestMatchers("/Quiz/quiz/**").hasRole("ELEVE")
+				.requestMatchers("/Quiz/quiz/**").permitAll()
+
 
 				.requestMatchers("/Question/**").permitAll()
 				.requestMatchers("/Choice/**").permitAll()

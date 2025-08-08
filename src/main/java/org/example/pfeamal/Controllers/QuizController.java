@@ -1,11 +1,9 @@
 package org.example.pfeamal.Controllers;
 
 
-import org.example.pfeamal.Entities.Enseignant;
-import org.example.pfeamal.Entities.Matiere;
-import org.example.pfeamal.Entities.Quiz;
-import org.example.pfeamal.Entities.User;
+import org.example.pfeamal.Entities.*;
 import org.example.pfeamal.Repositories.EnseignantRepository;
+import org.example.pfeamal.Repositories.EvaluationQuizRepository;
 import org.example.pfeamal.Repositories.QuizRepo;
 import org.example.pfeamal.Repositories.UserRepository;
 import org.example.pfeamal.Services.MatireService;
@@ -18,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/Quiz")
@@ -36,6 +36,8 @@ public class QuizController {
 
     @Autowired
     private QuizRepo quizRepo;
+    @Autowired
+    EvaluationQuizRepository evaluationRepository;
 
     @PostMapping("/addquiz")
     @PreAuthorize("hasRole('ENSEIGNANT')")
@@ -55,16 +57,16 @@ public class QuizController {
     public Quiz getOneQuiz(@PathVariable Long id) {
         return quizRepo.findById(id).get();
     }
-/*
+
 
 
 
 
 @PostMapping("/quiz/{quizId}/submit")
-@PreAuthorize("hasRole('ETUDIANT')")
+//@PreAuthorize("hasRole('ELEVE')")
 public ResponseEntity<?> submitQuiz(@PathVariable Long quizId, @RequestBody Map<Long, Integer> reponses, Principal principal) {
-    Quiz quiz = quizRepository.findById(quizId).orElseThrow();
-    Utilisateur user = utilisateurRepository.findByUsername(principal.getName()).get();
+    Quiz quiz = quizRepo.findById(quizId).orElseThrow();
+    User user = userRepository.findByUsername(principal.getName()).get();
 
     double score = 0;
     int total = quiz.getQuestions().size();
@@ -76,7 +78,7 @@ public ResponseEntity<?> submitQuiz(@PathVariable Long quizId, @RequestBody Map<
         }
     }
 
-    Evaluation eval = new Evaluation();
+    EvaluationQuiz eval = new EvaluationQuiz();
     eval.setQuiz(quiz);
     eval.setUtilisateur(user);
     eval.setNote((score / total) * 20);
@@ -88,7 +90,7 @@ public ResponseEntity<?> submitQuiz(@PathVariable Long quizId, @RequestBody Map<
 
 
 
-*/
+
     /*
     @PostMapping("/addMatiere")
     public Matiere addMatiere(Matiere mat) {

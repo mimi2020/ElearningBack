@@ -21,4 +21,44 @@ public class EvaluationQuiz {
 
         @ElementCollection
         private Map<Long, Integer> reponses; // questionId -> index choisi
-    }
+
+        public Long getId() {
+                return id;
+        }
+
+        public void setId(Long id) {
+                this.id = id;
+        }
+
+        public Quiz getQuiz() {
+                return quiz;
+        }
+
+        public void setQuiz(Quiz quiz) {
+                this.quiz = quiz;
+        }
+
+        public User getUtilisateur() {
+                return utilisateur;
+        }
+
+        public void setUtilisateur(User utilisateur) {
+                this.utilisateur = utilisateur;
+        }
+
+        public double getNote() {
+                return note;
+        }
+
+        public void setNote(double note) {
+                this.note = note;
+        }
+
+        public Map<Long, Integer> getReponses() {
+                return reponses;
+        }
+
+        public void setReponses(Map<Long, Integer> reponses) {
+                this.reponses = reponses;
+        }
+}
