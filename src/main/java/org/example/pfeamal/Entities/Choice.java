@@ -30,9 +30,9 @@ public class Choice {
         this.text = text;
     }
 
-    public Question getQuestion() {
-        return question;
-    }
+//    public Question getQuestion() {
+//        return question;
+//    }
 
     public void setQuestion(Question question) {
         this.question = question;

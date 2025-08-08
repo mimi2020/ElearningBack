@@ -95,7 +95,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 				.requestMatchers("/Cours/**").permitAll()
 				.requestMatchers("/Matiere/**").permitAll()
 				//.requestMatchers("/quiz/**").authenticated()
-				.requestMatchers("/Quiz/listquiz/**").permitAll()
+				.requestMatchers("/Quiz/**").permitAll()
 				.requestMatchers("/quiz/create").hasRole("ENSEIGNANT")
 
 				.requestMatchers("/Question/**").permitAll()
@@ -105,7 +105,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 
 
 				//.requestMatchers("/User/signin").permitAll()
-				.requestMatchers("/User/signin", "/User/signup").permitAll()
+				.requestMatchers("/User/signin", "/User/signup","/User/registerStudent").permitAll()
 // autorise login/signup sans token
 				.anyRequest().authenticated();
 

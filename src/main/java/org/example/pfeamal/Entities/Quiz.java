@@ -50,7 +50,7 @@ public class Quiz {
     private List<Question> questions;
 
 
-    @JsonIgnore
+  //  @JsonIgnore
     public List<Question> getQuestions() {
         return questions;
     }

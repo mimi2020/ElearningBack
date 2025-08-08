@@ -50,6 +50,11 @@ public class QuizController {
     public ResponseEntity<List<Quiz>> getAllQuiz() {
         return ResponseEntity.ok(quizRepo.findAll());
 }
+
+    @GetMapping("/Onequiz/{id}")
+    public Quiz getOneQuiz(@PathVariable Long id) {
+        return quizRepo.findById(id).get();
+    }
 /*
 
 

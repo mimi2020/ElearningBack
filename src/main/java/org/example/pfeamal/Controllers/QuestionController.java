@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/Question")
@@ -43,6 +44,14 @@ public class QuestionController {
         q.setQuiz(qz);
         return ResponseEntity.ok(questionRepository.save(q));
     }
+
+
+    @GetMapping("/listquestion/{idquiz}")
+    public ResponseEntity<List<Question>> getAllQuestion(@PathVariable Long idquiz) {
+        Quiz qz=quizRepo.findById(idquiz).get() ;
+        return ResponseEntity.ok(questionRepository.findAllByQuiz(qz));
+    }
+
 
 
 /*

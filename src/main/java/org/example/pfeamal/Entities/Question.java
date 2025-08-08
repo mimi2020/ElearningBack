@@ -36,14 +36,14 @@ public class Question {
         this.content = content;
     }
 
-    public Quiz getQuiz() {
-        return quiz;
-    }
+//    public Quiz getQuiz() {
+//        return quiz;
+//    }
 
     public void setQuiz(Quiz quiz) {
         this.quiz = quiz;
     }
-@JsonIgnore
+//@JsonIgnore
     public List<Choice> getChoices() {
         return choices;
     }
